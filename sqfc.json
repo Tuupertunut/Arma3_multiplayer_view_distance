@@ -1,0 +1,11 @@
+{
+    "inputDirs": [
+        "P:/multiplayer_view_distance/"
+    ],
+    "includePaths": [
+        "P:/"
+    ],
+    "excludeList": [],
+    "outputDir": "P:/",
+    "workerThreads": 4
+}
