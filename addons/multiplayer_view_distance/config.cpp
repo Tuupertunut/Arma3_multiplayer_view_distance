@@ -4,6 +4,9 @@ class CfgPatches
 	{
 		author="Tuupertunut";
 		name="multiplayer_view_distance";
+		requiredAddons[] = {};
+		units[] = {};
+		weapons[] = {};
 	};
 };
 
