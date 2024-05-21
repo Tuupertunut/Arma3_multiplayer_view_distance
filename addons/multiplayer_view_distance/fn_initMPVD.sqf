@@ -3,29 +3,9 @@ if (isMultiplayer) then {
     serverViewDistance = 1e38;
     serverTerrainGrid = 0;
 
-    MPVD_fnc_updateViewDistance = {
-        private _videoOptions = getVideoOptions;
-        private _localViewDistance = _videoOptions get "overallVisibility";
-        private _localTerrainGrid = _videoOptions get "terrainQuality";
-
-        setViewDistance (serverViewDistance min _localViewDistance);
-        setTerrainGrid (serverTerrainGrid max _localTerrainGrid);
-
-        // Server view distance update also affects clients, so send them updated variables and a command to update themselves
-        if (isServer) then {
-            [[_localViewDistance, _localTerrainGrid], {
-                params ["_serverViewDistance", "_serverTerrainGrid"];
-                serverViewDistance = _serverViewDistance;
-                serverTerrainGrid = _serverTerrainGrid;
-
-                call MPVD_fnc_updateViewDistance;
-            }] remoteExec ["call", -2, "MPVD_JIP_ID"]; // Using a common JIP ID so later updates overwrite old ones on the JIP queue
-        };
-    };
-
     // Start the first view distance correction on server side
     if (isServer) then {
-        call MPVD_fnc_updateViewDistance;
+        call mpvd_fnc_updateViewDistance;
     };
 
     // If the process has interface, whether client or server, add some UI event handlers
@@ -35,7 +15,7 @@ if (isMultiplayer) then {
             params ["_display", "_class"];
             if (_class isEqualTo "RscDisplayOptionsVideo") then {
 
-                // Event handler for changing view distance in video options. 103 = overall visibility number field.
+                // Event handler for changing view distance in video options. 103 = IDC_OPTIONS_VISIBILITY_VALUE, overall visibility number field.
                 (_display displayCtrl 103) ctrlAddEventHandler ["EditChanged", {
                     params ["_control", "_newText"];
 
@@ -43,7 +23,7 @@ if (isMultiplayer) then {
                     setViewDistance (serverViewDistance min _newViewDistance);
                 }];
 
-                // Event handler for changing terrain grid in video options. 123 = terrain quality dropdown menu.
+                // Event handler for changing terrain grid in video options. 123 = IDC_OPTIONS_TERRAIN, terrain quality dropdown menu.
                 (_display displayCtrl 123) ctrlAddEventHandler ["LBSelChanged", {
                     params ["_control", "_lbCurSel"];
 
@@ -60,7 +40,7 @@ if (isMultiplayer) then {
             if (_class isEqualTo "RscDisplayOptionsVideo") then {
                 with missionNamespace do {
 
-                    call MPVD_fnc_updateViewDistance;
+                    call mpvd_fnc_updateViewDistance;
                 };
             };
         }] call BIS_fnc_addScriptedEventHandler;

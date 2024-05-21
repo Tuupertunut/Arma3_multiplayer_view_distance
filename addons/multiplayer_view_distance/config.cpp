@@ -21,6 +21,8 @@ class CfgFunctions
 			{
 				preInit = 1;
 			};
+			class updateViewDistance {};
+			class processRemoteUpdate {};
 		};
 	};
 };
