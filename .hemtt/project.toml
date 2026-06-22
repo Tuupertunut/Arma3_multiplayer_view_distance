@@ -1,0 +1,10 @@
+name = "multiplayer_view_distance"
+author = "Tuupertunut"
+prefix = "multiplayer_view_distance"
+mainprefix = "z"
+
+[version]
+major = 1
+minor = 0
+patch = 0
+build = 0

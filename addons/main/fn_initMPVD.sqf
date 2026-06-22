@@ -1,5 +1,5 @@
 if (isMultiplayer) then {
-    // Default values to allow the server itself to have no limit when adjusting its view distance. We cannot use actual infinity (1e39 in SQF) because ArmaScriptCompiler will fail to compile it, so using 1e38 instead.
+    // Default values to allow the server itself to have no limit when adjusting its view distance. 1e38 represents an impossibly big number.
     serverViewDistance = 1e38;
     serverTerrainGrid = 0;
 
@@ -28,7 +28,7 @@ if (isMultiplayer) then {
                     params ["_control", "_lbCurSel"];
 
                     // The dropdown menu does not directly contain terrain grid values, so searching for them in config by using the texts from the dropdown menu
-                    private _newTerrainGrid = getNumber (("getText (_x >> 'text') isEqualTo (_control lbText _lbCurSel)" configClasses (configfile >> "CfgVideoOptions" >> "TerrainQuality")) # 0 >> "terrainGrid");
+                    private _newTerrainGrid = getNumber (("getText (_x >> 'text') isEqualTo (_control lbText _lbCurSel)" configClasses (configFile >> "CfgVideoOptions" >> "TerrainQuality")) # 0 >> "terrainGrid");
                     setTerrainGrid (serverTerrainGrid max _newTerrainGrid);
                 }];
             };

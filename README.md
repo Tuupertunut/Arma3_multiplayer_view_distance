@@ -6,16 +6,10 @@ This mod makes the multiplayer respect the client's view distance and terrain gr
 
 The mod is very simple and works purely in the background. It does not expose any UI or configurable options. The user won't notice it running in any other way than view distance respecting the user's settings in multiplayer.
 
-## How to build (on Linux)
+## How to build
 
-1. Have Wine installed
-2. Have P: drive setup in your wineprefix
-3. Have Bohemia's [Arma 3 Tools](https://store.steampowered.com/app/233800/Arma_3_Tools/) (from Steam) downloaded somewhere
-4. Have [ArmaScriptCompiler](https://github.com/dedmen/ArmaScriptCompiler) downloaded somewhere
-5. Edit your Wine, Arma 3 Tools and ArmaScriptCompiler paths to the `build-linux.sh` script
-6. Run `./build-linux.sh`
-
-There are no Windows build instructions as I haven't built this mod on Windows.
+1. Have [HEMTT](https://github.com/BrettMayson/HEMTT) installed
+2. Run `hemtt build` in the project directory
 
 ## TODO
 

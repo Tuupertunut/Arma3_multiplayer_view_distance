@@ -5,6 +5,7 @@ class CfgPatches
 		author="Tuupertunut";
 		name="multiplayer_view_distance";
 		requiredAddons[] = {};
+		requiredVersion = 2.14;
 		units[] = {};
 		weapons[] = {};
 	};
@@ -16,7 +17,7 @@ class CfgFunctions
 	{
 		class base
 		{
-			file = "\multiplayer_view_distance";
+			file = "\z\multiplayer_view_distance\addons\main";
 			class initMPVD
 			{
 				preInit = 1;
