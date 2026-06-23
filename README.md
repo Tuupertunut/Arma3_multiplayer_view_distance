@@ -14,6 +14,11 @@ This mod only adjusts view distance once when you join a mission or when you or 
 
 This mod needs communication between the server and client, and must be installed on both to work correctly. If installed only on the server, it only has an effect on the server's own view distance (so on player hosted servers the server player can adjust their view distance). If installed only on the client, it does nothing.
 
+## Links
+
+Steam Workshop:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3750588265
+
 ## How to build
 
 1. Have [HEMTT](https://github.com/BrettMayson/HEMTT) installed
