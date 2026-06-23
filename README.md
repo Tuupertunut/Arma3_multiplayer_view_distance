@@ -12,6 +12,8 @@ This mod is not compatible with any other mods that adjust view distance. If you
 
 This mod only adjusts view distance once when you join a mission or when you or the server adjusts their view distance settings. If you have a dynamic view distance mod (or a script in a mission) that constantly adjusts view distance based on the game situation, the dynamic one will win.
 
+This mod needs communication between the server and client, and must be installed on both to work correctly. If installed only on the server, it only has an effect on the server's own view distance (so on player hosted servers the server player can adjust their view distance). If installed only on the client, it does nothing.
+
 ## How to build
 
 1. Have [HEMTT](https://github.com/BrettMayson/HEMTT) installed

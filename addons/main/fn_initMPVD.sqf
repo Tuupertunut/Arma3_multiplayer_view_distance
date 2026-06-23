@@ -1,10 +1,13 @@
 if (isMultiplayer) then {
-    // Default values to allow the server itself to have no limit when adjusting its view distance. 1e38 represents an impossibly big number.
-    serverViewDistance = 1e38;
-    serverTerrainGrid = 0;
+    serverViewDistanceKnown = false;
 
     // Start the first view distance correction on server side
     if (isServer) then {
+        // Extreme values to allow the server itself to have no limit when adjusting its view distance.
+        serverViewDistance = 1e38;
+        serverTerrainGrid = 0;
+        serverViewDistanceKnown = true;
+
         call mpvd_fnc_updateViewDistance;
     };
 
@@ -19,17 +22,21 @@ if (isMultiplayer) then {
                 (_display displayCtrl 103) ctrlAddEventHandler ["EditChanged", {
                     params ["_control", "_newText"];
 
-                    private _newViewDistance = parseNumber _newText;
-                    setViewDistance (serverViewDistance min _newViewDistance);
+                    if (serverViewDistanceKnown) then {
+                        private _newViewDistance = parseNumber _newText;
+                        setViewDistance (serverViewDistance min _newViewDistance);
+                    };
                 }];
 
                 // Event handler for changing terrain grid in video options. 123 = IDC_OPTIONS_TERRAIN, terrain quality dropdown menu.
                 (_display displayCtrl 123) ctrlAddEventHandler ["LBSelChanged", {
                     params ["_control", "_lbCurSel"];
 
-                    // The dropdown menu does not directly contain terrain grid values, so searching for them in config by using the texts from the dropdown menu
-                    private _newTerrainGrid = getNumber (("getText (_x >> 'text') isEqualTo (_control lbText _lbCurSel)" configClasses (configFile >> "CfgVideoOptions" >> "TerrainQuality")) # 0 >> "terrainGrid");
-                    setTerrainGrid (serverTerrainGrid max _newTerrainGrid);
+                    if (serverViewDistanceKnown) then {
+                        // The dropdown menu does not directly contain terrain grid values, so searching for them in config by using the texts from the dropdown menu
+                        private _newTerrainGrid = getNumber (("getText (_x >> 'text') isEqualTo (_control lbText _lbCurSel)" configClasses (configFile >> "CfgVideoOptions" >> "TerrainQuality")) # 0 >> "terrainGrid");
+                        setTerrainGrid (serverTerrainGrid max _newTerrainGrid);
+                    };
                 }];
             };
         }] call BIS_fnc_addScriptedEventHandler;
